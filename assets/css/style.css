@@ -13,4 +13,7 @@ input {
     display: block;
 }
 
- 
+/* set background color for entire page */
+body{
+    background-color: rgb(242, 248, 246);
+  }
