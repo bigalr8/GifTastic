@@ -12,7 +12,12 @@ var topics =
         "Mitsubishi", "Nissan", "Porsche", "Ram Trucks", "Scion", "Smart", "Subaru", "Toyota", "Volkswagen", "Volvo Cars",
         "Hyundai", "Tesla Motors"]
 
-function buildTopicButtons(topic, i) {
+function buildTopicButtons(){
+    topics.sort();
+    topics.forEach(renderTopicButtons);
+}
+
+function renderTopicButtons(topic, i) {
     // console.log("buildTopicButtons"); 
     // console.log("topic: " ,topic, "   i: ", i);   
     /* TO DO: 
@@ -25,16 +30,21 @@ function buildTopicButtons(topic, i) {
     newButton.attr("data-topic", topic);
     newButton.text(topic);
     /* reference exisiting HTML element to insert new element before */
-    $("#buttons-anchor").prepend(newButton);
+    // $("#buttons-anchor").prepend(newButton);
+    $("#buttons-anchor").append(newButton);
+
 
 
 };
 // M A I N    
 /*    •	Take the topics in this array and create buttons in your HTML using a loop that appends a button for each string in the array. */
-topics.forEach(buildTopicButtons);
-console.log("Call buildTopicButtons");
+//Sort topics alphabetically then reverse so the 
+//buttonOrder();
+//topics.forEach(buildTopicButtons);
+//console.log("Call buildTopicButtons");
+buildTopicButtons();
 /*        
-//  •	On user click of a button, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.*/
+//  •	On user click of a button event, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.*/
 //      Reference button class and listen for "click" event
 $(".topicButton").on("click", function () {
     console.log("click");
@@ -58,6 +68,8 @@ $(".topicButton").on("click", function () {
             console.log(response);
         // Store the GIF object
         var gifsData = response.data;
+        // Empty images from previous make
+        $("#images-anchor").empty();
 
         //loop thu the GIF object to add each GIF to the page along with the MPAA rating
         for (i=0; i < gifsData.length;i++) {

@@ -1,5 +1,5 @@
 /* set margin of 10px for all interface elements and all divs */
-button,
+/* button, */
 div,
 form,
 input {
@@ -8,9 +8,9 @@ input {
 
 /* set width and positioning to base container */
 #container {
-    max-width: 960px;
+/*    max-width: 960px; */
     margin:auto;
-    display: block; 
+/*    display: block; */
 }
 
 /* set background color for entire page */
@@ -19,6 +19,37 @@ body{
   }
 
 .topicGif
+/*.input*/
 {
     float:left;
+}
+
+.clearfix {
+    overflow: auto;
+  }
+
+input {
+/*    margin:auto; */
+      text-align: center;  
+}
+
+button
+.btn 
+.btn-primary {
+    
+    margin-left: 15px;
+    border: 1px solid black;
+}
+#images-anchor{
+    width:860px;
+    float: left;
+    position: relative;
+}
+#addTopicForm{
+    width: 100px;
+    float: right;
+    position: relative;
+    display: inline-block;
+    margin-right:auto;
+    margin-left:auto;
 }
