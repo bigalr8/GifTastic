@@ -42,9 +42,11 @@ $(".topicButton").on("click", function () {
     var topic = $(this).attr("data-topic");
     console.log(topic);
 
+    var moCarStr = "";
+
     //   Build AJAX query URL for topic specifying limit of 10 gifs
     var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-        topic + "&api_key=dc6zaTOxFJmzC&limit=10";
+        topic + moCarStr + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
 
     //   Submit AJAX request with the query URL
     $.ajax({
@@ -63,6 +65,9 @@ $(".topicButton").on("click", function () {
             // Create div
             var gifDiv = $("<div>");
 
+            // add a class to gif div
+            gifDiv.addClass("topicGif")
+
             // Create papagraph for rating
             var gifP = $("<p>");
 
@@ -75,11 +80,11 @@ $(".topicButton").on("click", function () {
             // Set the img source URL from the response gif data to that for the "static, non-animated" version of the gif 
             gifImg.attr("src", gifsData[i].images.fixed_height_still.url);
 
-            // Append the rating paragraph to the div
-            gifDiv.append(gifP);
-
             //append the img to the paragrapgh in the div
             gifDiv.append(gifImg);
+
+            // Append the rating paragraph to the div
+            gifDiv.append(gifP);
 
             //Place the div,p, and img set before the anchor div by referencing it and using the "prepend method"
             $("#images-anchor").prepend(gifDiv);

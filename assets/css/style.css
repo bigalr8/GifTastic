@@ -10,10 +10,15 @@ input {
 #container {
     max-width: 960px;
     margin:auto;
-    display: block;
+    display: block; 
 }
 
 /* set background color for entire page */
 body{
     background-color: rgb(242, 248, 246);
   }
+
+.topicGif
+{
+    float:left;
+}
