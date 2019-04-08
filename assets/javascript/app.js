@@ -14,7 +14,7 @@ var topics =
 
 function buildTopicButtons() {
     $("#buttons-anchor").empty();
-    topics.sort();
+   // topics.sort();
     topics.forEach(renderTopicButtons);
 }
 
@@ -48,25 +48,29 @@ $(document).ready(function () {
     //console.log("Call buildTopicButtons");    
     buildTopicButtons();
 
-// I M A G E    E V E N T
+    // I M A G E    E V E N T
     /*      •	On user click of one of the still GIPHY images, the gif should animate. If the user clicks the gif again, it should stop playing.
             •	Under every gif, display its rating (PG, G, so on). */
 
-    $(".gifImage").on("click", function () {
+    $(document).on('click', '.gifImage', function () {
+        let image = $(this).parent('.topicGif');
+       // alert(image);//
+        //       });
+        //   $(".topicGif").on("click", function () {
         // get image current motion "state" (still or animated)
         console.log("image click");
         var motionState = $(this).attr("data-motion");
         // if current state is still change img source to that of animated and update state to animated
         if (motionState === "still") {
             console.log("image click: still to animated");
-            $(this).attr("src", $(this).attr(data - animatedGif));
-            $(this).attr(data - motionState, "animated");
+            $(this).attr("src", $(this).attr("data-animatedgif"));
+            $(this).attr("data-motion", "animated");
         }
         // otherwise vice-versa
         else if (motionState === "animated") {
             console.log("image click: animated to still");
-            $(this).attr("src", $(this).attr(data - stillGif));
-            $(this).attr(data - motionState, "still");
+            $(this).attr("src", $(this).attr("data-stillgif"));
+            $(this).attr("data-motionstate", "still");
 
         }
     });
@@ -75,26 +79,25 @@ $(document).ready(function () {
 
 
 
-// A D D - T O P I C   E V E N T           
+    // A D D - T O P I C   E V E N T           
     /*      •	Add a form to your page takes the value from a user input box and adds it into your `topics` array. 
     Then make a function call that takes each topic in the array remakes the buttons on the page. */
 
-    $("#add-topic").on("click", function () {
-//  Prevent form submission
+    $("#add-topic").on("click", function (event) {
+        //  Prevent form submission
         event.preventDefault();
         console.log("add topic click");
-//  Store use topic input - call 'val' method indicate no prefilled input, and "trim" to remove any white space around string 
+        //  Store use topic input - call 'val' method indicate no prefilled input, and "trim" to remove any white space around string 
         var userInput = $("#user-topic-input").val().trim();
         console.log("userInput: " + userInput);
         if (topics.includes(userInput)) {
             alert(userInput + " is an exisiting make");
         }
-        else 
-            {
+        else {
             topics.push(userInput);
             console.log("topics: " + topics);
             buildTopicButtons();
-            }
+        }
     });
 
 
@@ -102,7 +105,10 @@ $(document).ready(function () {
     // T O P I C   B U T T O N   E V E N T  
     //  •	On user click of a button event, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.*/
     //      Reference button class and listen for "click" event
-    $(".topicButton").on("click", function () {
+    $(document).on('click', '.topicButton', function () {
+  // $(".topicButton").on("click", function () {
+        let tButton = $(this).parent('#buttons-anchor');
+        alert(tButton);
         console.log("click");
         //  Save "topic" data value that was stored in each button
         var topic = $(this).attr("data-topic");
@@ -118,9 +124,9 @@ $(document).ready(function () {
         $.ajax({
             url: queryURL,
             method: "GET"
-        })
-            //  "Promise" to run following function after API data is returned
-            .then(function (response) {
+            })
+ //                 "Promise" to run following function after API data is returned
+        .then(function (response) {
                 console.log(response);
                 // Store the GIF object
                 var gifsData = response.data;
@@ -149,10 +155,10 @@ $(document).ready(function () {
                     gifImg.attr("src", gifsData[i].images.fixed_height_still.url);
 
                     // Set the "still" photo data value to that of the still photo url
-                    gifImg.attr("data-stillGif", gifsData[i].images.fixed_height_still.url);
+                    gifImg.attr("data-stillgif", gifsData[i].images.fixed_height_still.url);
 
                     // Set the animated photo data value to that of the anaimated photo url
-                    gifImg.attr("data-animatedGIf", gifsData[i].images.fixed_height.url);
+                    gifImg.attr("data-animatedgif", gifsData[i].images.fixed_height.url);
 
                     // Set the still/animated current state data value to "still"
                     gifImg.attr("data-motion", "still");
@@ -173,8 +179,7 @@ $(document).ready(function () {
                     //end for
                 }
                 //end then
-            }
-            )
+        });
 
 
     });
