@@ -1,7 +1,7 @@
 /*
         ### Instructions
 
-        •	DONE: Add "reset" = 
+        •	DONE: Add "reset" 
 
         •   create an array of strings, each one related to a topic that interests you. Save it to a variable called `topics`.  */
 
@@ -14,13 +14,12 @@ var topics =
 
 function buildTopicButtons() {
     $("#buttons-anchor").empty();
-   // topics.sort();
+    topics.sort();
     topics.forEach(renderTopicButtons);
 }
 
 function renderTopicButtons(topic, i) {
-    // console.log("buildTopicButtons"); 
-    // console.log("topic: " ,topic, "   i: ", i);   
+      
     /* TO DO: 
             foreach element in the array    
             create a variable newButton to hold a button element
@@ -31,7 +30,7 @@ function renderTopicButtons(topic, i) {
     newButton.attr("data-topic", topic);
     newButton.text(topic);
     /* reference exisiting HTML element to insert new element before */
-    // $("#buttons-anchor").prepend(newButton);
+     
     $("#buttons-anchor").append(newButton);
 
 
@@ -42,10 +41,7 @@ $(document).ready(function () {
 
 
     /*    •	Take the topics in this array and create buttons in your HTML using a loop that appends a button for each string in the array. */
-    //Sort topics alphabetically then reverse so the 
-    //buttonOrder();
-    //topics.forEach(buildTopicButtons);
-    //console.log("Call buildTopicButtons");    
+        
     buildTopicButtons();
 
     // I M A G E    E V E N T
@@ -54,21 +50,17 @@ $(document).ready(function () {
 
     $(document).on('click', '.gifImage', function () {
         let image = $(this).parent('.topicGif');
-       // alert(image);//
-        //       });
-        //   $(".topicGif").on("click", function () {
+       
         // get image current motion "state" (still or animated)
-        console.log("image click");
+         
         var motionState = $(this).attr("data-motion");
         // if current state is still change img source to that of animated and update state to animated
         if (motionState === "still") {
-            console.log("image click: still to animated");
             $(this).attr("src", $(this).attr("data-animatedgif"));
             $(this).attr("data-motion", "animated");
         }
         // otherwise vice-versa
         else if (motionState === "animated") {
-            console.log("image click: animated to still");
             $(this).attr("src", $(this).attr("data-stillgif"));
             $(this).attr("data-motionstate", "still");
 
@@ -86,16 +78,16 @@ $(document).ready(function () {
     $("#add-topic").on("click", function (event) {
         //  Prevent form submission
         event.preventDefault();
-        console.log("add topic click");
+         
         //  Store use topic input - call 'val' method indicate no prefilled input, and "trim" to remove any white space around string 
         var userInput = $("#user-topic-input").val().trim();
-        console.log("userInput: " + userInput);
+         
         if (topics.includes(userInput)) {
             alert(userInput + " is an exisiting make");
         }
         else {
             topics.push(userInput);
-            console.log("topics: " + topics);
+            
             buildTopicButtons();
         }
     });
@@ -106,19 +98,18 @@ $(document).ready(function () {
     //  •	On user click of a button event, the page should grab 10 static, non-animated gif images from the GIPHY API and place them on the page.*/
     //      Reference button class and listen for "click" event
     $(document).on('click', '.topicButton', function () {
-  // $(".topicButton").on("click", function () {
-        let tButton = $(this).parent('#buttons-anchor');
-        alert(tButton);
-        console.log("click");
+          let tButton = $(this).parent('#buttons-anchor');
+         
         //  Save "topic" data value that was stored in each button
         var topic = $(this).attr("data-topic");
-        console.log(topic);
+         
 
-        var moCarStr = "";
+         
 
         //   Build AJAX query URL for topic specifying limit of 10 gifs
+        // Limited results to images with "g" rating for more relevant subject matter
         var queryURL = "https://api.giphy.com/v1/gifs/search?q=" +
-            topic + moCarStr + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
+            topic + "&api_key=dc6zaTOxFJmzC&limit=10&rating=g";
 
         //   Submit AJAX request with the query URL
         $.ajax({
@@ -127,7 +118,7 @@ $(document).ready(function () {
             })
  //                 "Promise" to run following function after API data is returned
         .then(function (response) {
-                console.log(response);
+                
                 // Store the GIF object
                 var gifsData = response.data;
                 // Empty images from previous selection
