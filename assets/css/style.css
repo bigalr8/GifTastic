@@ -1,9 +1,24 @@
-/* set margin of 10px for all interface elements and all divs */
-/* button, */
+body
+{
+    background-image: url("../images/Autopedia.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    /*Color: white;
+    clear:right;*/
+}
+
+button {
+    margin: auto;
+}
+
 div,
-form,
-input {
+form
+/*input*/ {
     margin: 10px;
+}
+
+input {
+    margin-bottom: 10px;
 }
 
 /* set width and positioning to base container */

@@ -26,7 +26,7 @@ function renderTopicButtons(topic, i) {
             set the button id attr to 'topicButton',set the data value and the text to that of the array string */
     var newButton = $("<button>");
     newButton.addClass("topicButton");
-    newButton.addClass("btn btn-primary");
+    newButton.addClass("btn btn-outline-primary");
     newButton.attr("data-topic", topic);
     newButton.text(topic);
     /* reference exisiting HTML element to insert new element before */
@@ -81,9 +81,12 @@ $(document).ready(function () {
          
         //  Store use topic input - call 'val' method indicate no prefilled input, and "trim" to remove any white space around string 
         var userInput = $("#user-topic-input").val().trim();
-         
+        console.log("userInput: " + userInput); 
         if (topics.includes(userInput)) {
-            alert(userInput + " is an exisiting make");
+            alert(userInput + " is an existing make");
+        }
+        else if (userInput == "") {
+            alert("Please specify a make");
         }
         else {
             topics.push(userInput);
