@@ -1,3 +1,4 @@
+
 body
 {
     background-image: url("../images/Autopedia.png");
@@ -13,7 +14,7 @@ button {
 
 div,
 form
-/*input*/ {
+ {
     margin: 10px;
 }
 
